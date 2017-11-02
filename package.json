@@ -1,0 +1,21 @@
+{
+  "name": "panda-danmu",
+  "version": "1.0.0",
+  "description": "panda.tv danmu module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "panda.tv",
+    "panda",
+    "danmu"
+  ],
+  "author": "BacooTang",
+  "license": "MIT",
+  "dependencies": {
+    "ws": "*",
+    "request": "*",
+    "request-promise": "*"
+  }
+}
