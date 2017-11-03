@@ -147,7 +147,7 @@ class panda_danmu extends events {
                         rid: msg.data.from.rid
                     },
                     count: parseInt(msg.data.content),
-                    price: parseInt(msg.data.content) * 0.001,
+                    price: parseInt(msg.data.content) * 0.01,
                     raw: msg
                 }
                 break;
@@ -161,7 +161,7 @@ class panda_danmu extends events {
                         rid: msg.data.from.rid
                     },
                     count: parseInt(msg.data.content.count),
-                    price: parseInt(msg.data.content.count) * parseFloat(msg.data.content.price) * 0.1,
+                    price: parseInt(msg.data.content.count) * parseFloat(msg.data.content.price),
                     raw: msg
                 }
                 break;

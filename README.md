@@ -127,7 +127,7 @@ msg对象type有chat,gift,online,weight,other五种值
             rid: '发送者rid,String'
         },
         count: '礼物数量,Number',
-        price: '礼物总价值(单位元),Number'
+        price: '礼物总价值(单位猫币),Number'
         raw: '原始消息,Object'
     }
 ```
