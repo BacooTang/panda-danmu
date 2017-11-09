@@ -97,8 +97,8 @@ client.on('close', () => {
 
 ### msg对象
 
-msg对象type有chat,gift,online,weight,other五种值
-分别对应聊天内容、礼物、在线人数、体重、其他
+msg对象type有chat,gift,online,height,other五种值
+分别对应聊天内容、礼物、在线人数、身高、其他
 
 #### chat消息
 ```javascript
@@ -145,12 +145,12 @@ msg对象type有chat,gift,online,weight,other五种值
     }
 ```
 
-#### weight消息
+#### height消息
 ```javascript
     {
-        type: 'weight',
+        type: 'height',
         time: '毫秒时间戳,Number',
-        content: '主播当前体重,Number',
+        content: '主播当前身高,Number',
         raw: '原始消息,Object'
     }
 ```

@@ -1,6 +1,6 @@
 {
   "name": "panda-danmu",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "panda.tv danmu module",
   "main": "index.js",
   "scripts": {
@@ -23,6 +23,7 @@
   "homepage": "https://github.com/BacooTang/panda-danmu#readme",
   "dependencies": {
     "ws": "*",
+    "md5": "*",
     "request": "*",
     "request-promise": "*"
   }

@@ -1,4 +1,5 @@
 const ws = require('ws')
+const md5 = require('md5')
 const events = require('events')
 const request = require('request-promise')
 const REQUEST_TIMEOUT = 10000
@@ -131,7 +132,7 @@ class panda_danmu extends events {
                 break;
             case '208':
                 msg_obj = {
-                    type: 'weight',
+                    type: 'height',
                     time: msg.time * 1000,
                     content: parseInt(msg.data.content),
                     raw: msg
@@ -152,6 +153,7 @@ class panda_danmu extends events {
                 }
                 break;
             case '306':
+                let id = md5(`${msg.time}${msg.data.to.toroom}${msg.data.from.rid}${msg.data.content.name}${msg.data.content.newBamboos}${msg.data.content.newExp}`)
                 msg_obj = {
                     type: 'gift',
                     time: msg.time * 1000,
@@ -162,6 +164,7 @@ class panda_danmu extends events {
                     },
                     count: parseInt(msg.data.content.count),
                     price: parseInt(msg.data.content.count) * parseFloat(msg.data.content.price),
+                    id: id,
                     raw: msg
                 }
                 break;
