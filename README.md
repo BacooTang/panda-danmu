@@ -1,5 +1,7 @@
 # panda-danmu
 
+[![Coverage Status](https://coveralls.io/repos/github/BacooTang/panda-danmu/badge.svg?branch=master)](https://coveralls.io/github/BacooTang/panda-danmu?branch=master)
+
 panda-danmu 是Node.js版本熊猫TV（非星颜板块）弹幕监听模块。
 
 简单易用，使用不到三十行代码，你就可以使用Node.js基于弹幕进一步开发。

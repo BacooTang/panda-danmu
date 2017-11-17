@@ -4,7 +4,9 @@
   "description": "panda.tv danmu module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "ava",
+    "report": "nyc ava --verbose && nyc report --reporter=html",
+    "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
     "type": "git",
@@ -22,9 +24,14 @@
   },
   "homepage": "https://github.com/BacooTang/panda-danmu#readme",
   "dependencies": {
-    "ws": "*",
     "md5": "*",
     "request": "*",
-    "request-promise": "*"
+    "request-promise": "*",
+    "ws": "*"
+  },
+  "devDependencies": {
+    "ava": "^0.23.0",
+    "coveralls": "^3.0.0",
+    "nyc": "^11.3.0"
   }
 }

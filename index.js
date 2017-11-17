@@ -27,9 +27,7 @@ class panda_danmu extends events {
             body.data.chat_addr = body.data.chat_addr_list[0]
             delete body.data.chat_addr_list
             return body.data
-        } catch (e) {
-            return null
-        }
+        } catch (e) { }
     }
 
     async start() {
@@ -51,9 +49,9 @@ class panda_danmu extends events {
             perMessageDeflate: false
         })
         this._client.on('open', () => {
-            this.emit('connect')
             this._ws_bind_user()
             this._heartbeat_timer = setInterval(this._heartbeat.bind(this), HEARTBEAT_INTERVAL)
+            this.emit('connect')
         })
         this._client.on('error', err => {
             this.emit('error', err)
@@ -76,24 +74,28 @@ class panda_danmu extends events {
     }
 
     _on_msg(msg) {
-        if (msg.readInt16BE(0) !== 6) {
-            return this.emit('error', new Error('Wrong value of msg head'))
-        }
-        if (msg.readInt16BE(2) !== 3) {
-            return
-        }
-        let msg_len = msg.readInt16BE(4)
-        let offset = 6 + msg_len
-        msg_len = msg.readInt32BE(offset)
-        offset += 4
-        let total_msg = msg.slice(offset, offset + msg_len)
-        while (total_msg.length > 0) {
-            let ignore_len = 12
-            total_msg = total_msg.slice(ignore_len)
-            let msg_len = total_msg.readInt32BE(0)
-            let msg = total_msg.slice(4, 4 + msg_len)
-            total_msg = total_msg.slice(4 + msg_len)
-            this._format_msg(msg)
+        try {
+            if (msg.readInt16BE(0) !== 6) {
+                return this.emit('error', new Error('Wrong value of msg head'))
+            }
+            if (msg.readInt16BE(2) !== 3) {
+                return
+            }
+            let msg_len = msg.readInt16BE(4)
+            let offset = 6 + msg_len
+            msg_len = msg.readInt32BE(offset)
+            offset += 4
+            let total_msg = msg.slice(offset, offset + msg_len)
+            while (total_msg.length > 0) {
+                let ignore_len = 12
+                total_msg = total_msg.slice(ignore_len)
+                let msg_len = total_msg.readInt32BE(0)
+                let msg = total_msg.slice(4, 4 + msg_len)
+                total_msg = total_msg.slice(4 + msg_len)
+                this._format_msg(msg)
+            }
+        } catch (e) {
+            this.emit('error', e)
         }
     }
 
