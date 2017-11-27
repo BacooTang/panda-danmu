@@ -137,7 +137,7 @@ class panda_danmu extends events {
                 msg_obj = {
                     type: 'height',
                     time: msg.time * 1000,
-                    content: parseInt(msg.data.content),
+                    count: parseInt(msg.data.content),
                     raw: msg
                 }
                 break;
