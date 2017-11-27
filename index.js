@@ -117,6 +117,7 @@ class panda_danmu extends events {
                         level: parseInt(msg.data.from.level),
                         plat: msg.data.from.__plat
                     },
+                    id: md5(`${msg.data.from.rid}${msg.data.to.toroom}${msg.time}${msg.data.content}${msg.data.from.level}${msg.data.from.msgcolor}`),
                     content: msg.data.content,
                     raw: msg
                 }

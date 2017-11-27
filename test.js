@@ -1,5 +1,3 @@
-import { Buffer } from 'buffer';
-
 const { test } = require('ava')
 const request = require('request-promise')
 const panda_danmu = require('./index')
@@ -193,3 +191,24 @@ test.cb('get gift msg', t => {
         }
     })
 })
+
+// const panda_danmu = require('./index')
+
+
+// for (let i = 0; i < 2; i++) {
+//     const client = new panda_danmu('763137')
+//     client.on('message', msg => {
+//         if (msg.type === 'gift' && msg.name === '竹子') {
+//             console.log(JSON.stringify(msg));
+//         } else if (msg.type === 'height') {
+//             console.log(JSON.stringify(msg));
+//         }
+//     })
+
+//     client.on('error', err => {
+//         console.log(err);
+//     })
+
+//     client.start()
+// }
+
