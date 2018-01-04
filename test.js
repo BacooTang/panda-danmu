@@ -192,23 +192,32 @@
 //     })
 // })
 
-const panda_danmu = require('./index')
+// const panda_danmu = require('./index')
 
 
-for (let i = 0; i < 2; i++) {
-    const client = new panda_danmu('1130878')
-    client.on('message', msg => {
-        if (msg.type === 'gift' && msg.name !== '竹子') {
-            console.log(JSON.stringify(msg));
-        } else if (msg.type === 'online') {
-            console.log(JSON.stringify(msg));
-        }
-    })
+// for (let i = 0; i < 2; i++) {
+//     const client = new panda_danmu('1130878')
+//     client.on('message', msg => {
+//         if (msg.type === 'gift' && msg.name !== '竹子') {
+//             console.log(JSON.stringify(msg));
+//         } else if (msg.type === 'online') {
+//             console.log(JSON.stringify(msg));
+//         }
+//     })
 
-    client.on('error', err => {
-        console.log(err);
-    })
+//     client.on('error', err => {
+//         console.log(err);
+//     })
 
-    client.start()
-}
+//     client.start()
+// }
 
+
+
+const danmu = require('./index')
+const c = new danmu('10086')
+c.on('error', e => console.log(e))
+c.on('connect', e => console.log('connect'))
+c.on('close', e => console.log('close'))
+c.on('message', m => console.log(JSON.stringify(m)))
+c.start()

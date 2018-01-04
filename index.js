@@ -2,14 +2,27 @@ const ws = require('ws')
 const md5 = require('md5')
 const events = require('events')
 const request = require('request-promise')
+const socks_agent = require('socks-proxy-agent')
 const REQUEST_TIMEOUT = 10000
 const HEARTBEAT_INTERVAL = 30000
 
 class panda_danmu extends events {
 
-    constructor(roomid) {
+    constructor(roomid, proxy) {
         super()
         this._roomid = roomid
+        this.set_proxy(proxy)
+    }
+
+    set_proxy(proxy) {
+        this._agent = null
+        if (proxy) {
+            let auth = ''
+            if (proxy.name && proxy.pass)
+                auth = `${proxy.name}:${proxy.pass}@`
+            let socks_url = `socks://${auth}${proxy.ip}:${proxy.port || 8080}`
+            this._agent = new socks_agent(socks_url)
+        }
     }
 
     async _get_chat_info() {
@@ -17,7 +30,8 @@ class panda_danmu extends events {
             url: `https://riven.panda.tv/chatroom/getinfo?roomid=${this._roomid}&app=1&protocol=ws&_caller=panda-pc_web&_=${new Date().getTime()}`,
             timeout: REQUEST_TIMEOUT,
             json: true,
-            gzip: true
+            gzip: true,
+            agent: this._agent
         }
         try {
             let body = await request(opt)
@@ -46,7 +60,8 @@ class panda_danmu extends events {
     _start_ws() {
         this._client = new ws(`wss://${this._chat_info.chat_addr}`, {
             origin: 'https://www.panda.tv',
-            perMessageDeflate: false
+            perMessageDeflate: false,
+            agent: this._agent
         })
         this._client.on('open', () => {
             this._ws_bind_user()
