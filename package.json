@@ -1,6 +1,6 @@
 {
   "name": "panda-danmu",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "panda.tv danmu module",
   "main": "index.js",
   "scripts": {

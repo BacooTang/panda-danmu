@@ -182,6 +182,7 @@ class panda_danmu extends events {
                     },
                     count: parseInt(msg.data.content.count),
                     price: parseInt(msg.data.content.count) * parseFloat(msg.data.content.price),
+                    earn: parseInt(msg.data.content.count) * parseFloat(msg.data.content.price) * 0.1,
                     id: id,
                     raw: msg
                 }
