@@ -1,6 +1,6 @@
 {
   "name": "panda-danmu",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "panda.tv danmu module",
   "main": "index.js",
   "scripts": {
@@ -27,12 +27,12 @@
     "md5": "*",
     "request": "*",
     "request-promise": "*",
-    "ws": "*",
-    "socks-proxy-agent": "*"
+    "socks-proxy-agent": "*",
+    "ws": "^4.0.0"
   },
   "devDependencies": {
     "ava": "^0.23.0",
     "coveralls": "^3.0.0",
-    "nyc": "^11.3.0"
+    "nyc": "^11.4.1"
   }
 }
