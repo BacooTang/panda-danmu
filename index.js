@@ -1,12 +1,10 @@
 const ws = require('ws')
 const md5 = require('md5')
-const delay = require('delay')
 const events = require('events')
 const request = require('request-promise')
 const socks_agent = require('socks-proxy-agent')
 
 const timeout = 30000
-const close_delay = 100
 const heartbeat_interval = 30000
 const origin = 'https://www.panda.tv'
 const r = request.defaults({ json: true, gzip: true, timeout: timeout })
@@ -45,7 +43,6 @@ class panda_danmu extends events {
     async start() {
         if (this._starting) return
         this._starting = true
-        this._reconnect = true
         this._chat_info = await this._get_chat_info()
         if (!this._chat_info) return this.emit('close')
         this._start_ws()
@@ -68,8 +65,6 @@ class panda_danmu extends events {
         this._client.on('close', async () => {
             this._stop()
             this.emit('close')
-            await delay(close_delay)
-            this._reconnect && this.start()
         })
         this._client.on('message', this._on_msg.bind(this))
     }
@@ -209,7 +204,6 @@ class panda_danmu extends events {
     }
 
     stop() {
-        this._reconnect = false
         this.removeAllListeners()
         this._stop()
     }
